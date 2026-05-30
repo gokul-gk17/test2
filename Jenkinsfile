@@ -2,20 +2,20 @@ pipeline{
     agent any
     stages{
         stage('Dependencies'){
-            step{
+            steps{
                 bat 'mvn clean package'
             }
         }
 
         stage('build'){
-            step{
+            steps{
                 bat 'docker build -t springapp .'
             }
         }
 
         stage('Run'){
-            step{
-                bat 'docker run -p 8080:8080 --name spring-app1 springapp'
+            steps{
+                bat 'docker run -d -p 8080:8080 --name spring-app1 springapp'
             }
         }
     }
