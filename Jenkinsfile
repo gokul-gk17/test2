@@ -1,25 +1,27 @@
-pipeline{
+pipeline {
+
     agent any
-    tools {
-        maven 'maven' 
-    }
-    stages{
-        stage('Dependencies'){
-            steps{
-                sh 'mvn clean package'
+
+    stages {
+
+        stage('Build') {
+            steps {
+                sh 'echo Building Application'
             }
         }
 
-        stage('build'){
-            steps{
-                sh 'docker build -t springapp .'
+        stage('Docker Build') {
+            steps {
+                sh 'echo Building Docker Image'
             }
         }
 
-        stage('Run'){
-            steps{
-                sh 'docker run -d -p 8080:8080 --name spring-app1 springapp'
+        stage('Push') {
+            steps {
+                sh 'echo Pushing Image'
             }
         }
+
     }
+
 }
